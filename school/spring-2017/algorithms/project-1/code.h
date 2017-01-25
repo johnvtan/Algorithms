@@ -21,6 +21,7 @@ public:
 	int getIndex(int i) const;
 	int getLength() const;
 	int getRange() const;
+	vector<int> getSequence() const;
 	
 private:
 	vector<int> sequence;           // the stored code value

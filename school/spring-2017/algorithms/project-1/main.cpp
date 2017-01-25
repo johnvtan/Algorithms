@@ -19,18 +19,31 @@ int main()
 	//initialize the seed for the random number generator
 	srand(time(NULL));
 	
-	code secretCode(5, 6);
+	int length = 5;
+	int range = 10;
 	
-	//code guessCode1(5);
-	//guessCode1.printCode();
+	code secretCode(length, range);
 	
+	cout << "The secret code has a length of " << length << "." << endl;
+	cout << "The secret code has a range of " << range << "." << endl;
+	
+	cout << "Secret Code: " ;
 	secretCode.printCode();
 	
+	code guessCode1(secretCode);
 	
-	code guessCode(secretCode);
-	guessCode.printCode();
+	cout << "Number Correct: " << secretCode.checkCorrect(guessCode1) << endl;
+	cout << "Number Incorrect: " << secretCode.checkIncorrect(guessCode1) << endl;
 	
-	cout << "NumCorrect: " << secretCode.checkCorrect(guessCode) << endl;
+	code guessCode2(secretCode);
 	
+	cout << "Number Correct: " << secretCode.checkCorrect(guessCode2) << endl;
+	cout << "Number Incorrect: " << secretCode.checkIncorrect(guessCode2) << endl;
+	
+	code guessCode3(secretCode);
+	
+	cout << "Number Correct: " << secretCode.checkCorrect(guessCode3) << endl;
+	cout << "Number Incorrect: " << secretCode.checkIncorrect(guessCode3) << endl;
+
 	return 0;
 }

@@ -27,7 +27,7 @@ code::code(int n, int m)
 	
 } // end code constructor
 
-code::code(const code &secretCode)  
+code::code(const code &secretCode) 
 // constructor for the "code" class object, where "n" is the length of the
 // guess code, then the user inputs the values of the sequence
 {
@@ -52,12 +52,22 @@ void code::getGuessCode()
 	// iterate until enough values have been added to sequence
 	for (int i = 0; i < length; i++)
 	{
-		int val;
 		cout << "Value " << i + 1 << ": ";
-		cin >> val; 
+		
+		int val;
+		cin >> val;
+		
+		// if the entered value is not an integer
+		if (cin.fail()) 
+		{
+			cout << "Invalid input. Enter an integer value." << endl;
+			cin.clear();
+			cin.ignore();
+			i--;
+		}
 		
 		// if the entered value is out of bounds
-		if (val < 0 || val >= range) 
+		else if (val < 0 || val >= range) 
 		{
 			cout << "Value entered is out of range" << endl;
 			cout << "Enter another value, between 0 and " << range - 1 << endl;
@@ -97,7 +107,66 @@ int code::checkIncorrect(const code &c) const
 // Returns the number of digits which are the correct value and in the 
 // incorrect place
 {
-	return 0; ////////////////////TODO
+	
+	// create shadow copies of both sequences
+	vector<int> secretSequence(sequence);
+	vector<int> guessSequence(c.getSequence());
+	
+	int numIncorrect = 0; // the number correct, to be returned
+	
+	// index points of both sequences
+	int secretI = 0;
+	int guessI = 0;
+	
+	// contains the indexes of the guesses that have already been looked at
+	vector<int> checkedGuessIndexes;
+	
+	
+	bool checkedAlready = false;
+	
+	// increment through the sequences until you reach the end of either
+	while (secretI < length ) 
+	{
+		// goes through checkedGuessIndexes to see if guessI has been checked
+		for (int i = 0; i < checkedGuessIndexes.size(); i ++) 
+		{
+			if (checkedGuessIndexes[i] == guessI)
+			{
+				checkedAlready = true;
+			}	
+		}
+		
+		if (!checkedAlready) 
+		{
+			// if the two values are equal
+			if (secretSequence[secretI] == guessSequence[guessI]) 
+			{
+				numIncorrect ++;
+				secretI ++;
+				checkedGuessIndexes.push_back(guessI);
+				guessI = 0;	
+			}
+			
+			// if the two values are not equal
+			else 
+			{
+				guessI++;
+				
+				if (guessI >= guessSequence.size()) {
+					guessI = 0;
+					secretI++;
+				}
+			}
+		}
+		
+		else {
+			guessI++;
+			checkedAlready = false;
+		}
+		
+	}
+	
+	return numIncorrect - checkCorrect(c); 
 }
 
 int code::getIndex(int i) const 
@@ -138,9 +207,14 @@ int code::getLength() const
 	return length;
 }
 
-
 int code::getRange() const
 // returns the range data member
 {
 	return range;
+}
+
+vector<int> code::getSequence() const
+// returns the sequence data member
+{
+	return sequence;
 }
