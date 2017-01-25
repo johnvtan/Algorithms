@@ -10,65 +10,137 @@
 
 using namespace std;
 
-//constructor for "code" class object
+code::code(int n, int m)
+// constructor for "code" class object
 // n is the length of the code, and m is the range of values in the code
-code::code(int n, int m) {
-	sequence.resize(n);
+{
+	
+	// initialize the length and range 
+	length = n;
+	range = m;
+	
+	// resize sequence to size n
+	sequence.resize(length);
+	
 	// initializes each of the values randomly, using n and m
-	randomCode(n, m);
-}
+	randomCode();
+	
+} // end code constructor
 
-//constructor for the "code" class object
-// n is the length of the guess code, then the user inputs the values of the sequence
-code::code(int n) {
-	// asks the user for input, 
-	getGuessCode(n);
-}
+code::code(const code &secretCode)  
+// constructor for the "code" class object, where "n" is the length of the
+// guess code, then the user inputs the values of the sequence
+{
+	length = secretCode.getLength();
+	range = secretCode.getRange();
+	
+	// asks the user for input, and sets the sequence to that input
+	getGuessCode();	
+	
+} // end code constructor
 
-
-void code::getGuessCode(int n) {
+void code::getGuessCode() 
+// gets the values of sequence from the user (their guess code)
+{
+	
+	// empties the sequence of it's current values, so new values can be added
 	sequence.clear();
 	
+	// prompt the user for their guess code, 1 value at a time
 	cout << "Enter your guess code, 1 value at a time." << endl;
 	
-	for(int i = 0; i < n; i++) {
+	// iterate until enough values have been added to sequence
+	for (int i = 0; i < length; i++)
+	{
 		int val;
-		cin >> val; //ADD INPUT CHECKING
-		sequence.push_back(val);
+		cout << "Value " << i + 1 << ": ";
+		cin >> val; 
+		
+		// if the entered value is out of bounds
+		if (val < 0 || val >= range) 
+		{
+			cout << "Value entered is out of range" << endl;
+			cout << "Enter another value, between 0 and " << range - 1 << endl;
+			i--;
+		}
+		else 
+		{
+			sequence.push_back(val);
+		}
 	}
-}
+	
+} // end code 
 
-// Returns the number of digits which are the correct value and in the correct place
-int code::checkCorrect(const code &c) {
+int code::checkCorrect(const code &c) const
+// Returns the number of digits which are the correct value and in the correct 
+// place
+{
+	
+	//initialize numCorrect to 0
 	int numCorrect = 0;
-	for(int i = 0; i < sequence.size(); i++) {
-		if(getIndex(i) == c.getIndex(i)) {
+	
+	// iterate through each code, calculate the number of values that are equal
+	// and at the same index
+	for (int i = 0; i < sequence.size(); i++) 
+	{
+		if (getIndex(i) == c.getIndex(i)) 
+		{
 			numCorrect++;
 		}
 	}
 	
 	return numCorrect;
+	
+} // end checkCorrect
+
+int code::checkIncorrect(const code &c) const
+// Returns the number of digits which are the correct value and in the 
+// incorrect place
+{
+	return 0; ////////////////////TODO
 }
 
-// Returns the number of digits which are the correct value and in the incorrect place
-int code::checkIncorrect(const code &c) {
-	return 0;
-}
-
-int code::getIndex(int i) const {
+int code::getIndex(int i) const 
+// returns the value of the sequence at index "i"
+{
 	return sequence.at(i);
 }
 
-void code::randomCode(int n, int m) {
-	for (int i = 0; i < n; i++) {
-		sequence[i] = rand() % m;
+void code::randomCode() 
+// initializes sequence with length of "n" and random value in range of [0:m) 
+{
+	
+	// iterates until "n" values are assigned
+	for (int i = 0; i < length; i++) 
+	{
+		sequence[i] = rand() % range;
 	}
+	
 }
 
-//prints the sequence vector
-void code::printCode() {
-	for (int i = 0; i < sequence.size(); i++) {
+void code::printCode() const
+// prints the sequence vector, separating values by spaces on a single line
+{
+	
+	// iterates through sequence vector
+	for (int i = 0; i < length; i++) 
+	{
 		cout << sequence[i] << " ";
 	}
+	
 	cout << endl;
+	
+} // end printCode
+
+int code::getLength() const
+// returns the length data member
+{
+	return length;
+}
+
+
+int code::getRange() const
+// returns the range data member
+{
+	return range;
 }

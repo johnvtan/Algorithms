@@ -1,18 +1,33 @@
+// Mary Forde, John Tan
+// Project 1a
+
+// This file declares the "code" class
+
 #include <vector>
 
 using namespace std;
 
-class code {
+class code 
+{
 public:
+// constructors:	
 	code(int n, int m);
-	code(int n);
-	int checkCorrect(const code &c);
-	int checkIncorrect(const code &c);
-	void printCode();
+	code(const code &secretCode);
+	
+// public code operations:	
+	int checkCorrect(const code &c) const;
+	int checkIncorrect(const code &c) const;
+	void printCode() const;
 	int getIndex(int i) const;
+	int getLength() const;
+	int getRange() const;
 	
 private:
-	vector<int> sequence;
-	void randomCode(int n, int m);
-	void getGuessCode(int m);
+	vector<int> sequence;           // the stored code value
+	int length;
+	int range; 
+	
+// private code operations:	
+	void randomCode();
+	void getGuessCode();
 };
