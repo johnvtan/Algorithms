@@ -15,13 +15,13 @@ using namespace std;
 int main() 
 // the main function
 {
-	
-	//initialize the seed for the random number generator
+	// initialize the seed for the random number generator
 	srand(time(NULL));
 	
-	int length = 5;
-	int range = 10;
-	
+	int length = 5; // the length of the secret and guess codes
+	int range = 10; // the range of values available for the codes, [0:range)
+
+	// initialize the secret code with the length and range	
 	code secretCode(length, range);
 	
 	cout << "The secret code has a length of " << length << "." << endl;

@@ -121,13 +121,15 @@ int code::checkIncorrect(const code &c) const
 	// contains the indexes of the guesses that have already been looked at
 	vector<int> checkedGuessIndexes;
 	
-	
+	// flag variable, used to indicate if the guessIndex has already been
+	// accounted for, and is in the checkedGuessIndexes vector
 	bool checkedAlready = false;
 	
 	// increment through the sequences until you reach the end of either
 	while (secretI < length ) 
 	{
-		// goes through checkedGuessIndexes to see if guessI has been checked
+		// goes through checkedGuessIndexes to see if guessI has been checked,
+		// sets checkedAlready to true if guessI is in checkedGuessIndexes
 		for (int i = 0; i < checkedGuessIndexes.size(); i ++) 
 		{
 			if (checkedGuessIndexes[i] == guessI)
@@ -136,22 +138,31 @@ int code::checkIncorrect(const code &c) const
 			}	
 		}
 		
+		// if guessI is not an index in the checkedGuessIndexes vector
 		if (!checkedAlready) 
 		{
-			// if the two values are equal
+			// if the secret and guess values at the given indexes are equal
 			if (secretSequence[secretI] == guessSequence[guessI]) 
 			{
+				// we found a "incorrect" value, so we increment numIncorrect,
+				// and add this guessI to the checkedGuessIndexes vector, then
+				// we look at the next secretSequence value, and look back at 
+				// the first guessSequence value
 				numIncorrect ++;
-				secretI ++;
-				checkedGuessIndexes.push_back(guessI);
+				checkedGuessIndexes.push_back(guessI);	                          
+				secretI ++;								 
 				guessI = 0;	
 			}
 			
-			// if the two values are not equal
+			// if the secret and guess values are NOT equal
 			else 
 			{
+				// we look at the next guess value in the guessSequence
 				guessI++;
 				
+				// if we've reached the end of the guessSequence, then the 
+				// secretSequence value is not in the guessSequence, so we
+				// look at the next secretSequence value and reset guessI
 				if (guessI >= guessSequence.size()) {
 					guessI = 0;
 					secretI++;
@@ -159,6 +170,9 @@ int code::checkIncorrect(const code &c) const
 			}
 		}
 		
+		// if guessI is an index in the checkedGuessIndexes vector, then we've
+		// already counted it as a 'numCorrect', so we want to ignore it now,
+		// and move on to the next guessI
 		else {
 			guessI++;
 			checkedAlready = false;
@@ -166,8 +180,12 @@ int code::checkIncorrect(const code &c) const
 		
 	}
 	
+	// the current numIncorrect value ignores whether or not the shared values
+	// in secretSequence and guessSequence are in the same index, so we need to
+	// subtract the number of values we know are correct and in the same place
 	return numIncorrect - checkCorrect(c); 
-}
+	
+} // end checkIncorrect
 
 int code::getIndex(int i) const 
 // returns the value of the sequence at index "i"

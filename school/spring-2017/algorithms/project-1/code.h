@@ -7,12 +7,12 @@
 
 using namespace std;
 
-class code 
+class code
 {
 public:
 // constructors:	
-	code(int n, int m);
-	code(const code &secretCode);
+	code(int n, int m);           // constructor for secretCode
+	code(const code &secretCode); // constructor for guessCode
 	
 // public code operations:	
 	int checkCorrect(const code &c) const;
@@ -24,9 +24,9 @@ public:
 	vector<int> getSequence() const;
 	
 private:
-	vector<int> sequence;           // the stored code value
-	int length;
-	int range; 
+	vector<int> sequence; // the stored code value
+	int length;           // the length of the sequence
+	int range; 			  // the range of values in the sequence [0:range)
 	
 // private code operations:	
 	void randomCode();
