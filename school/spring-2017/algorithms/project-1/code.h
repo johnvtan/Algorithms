@@ -4,7 +4,6 @@
 // This file declares the "code" class
 
 #include <vector>
-
 using namespace std;
 
 class code 
@@ -25,10 +24,10 @@ public:
 	
 private:
 	vector<int> sequence;           // the stored code value
-	int length;
-	int range; 
+	int length;                     // length of the code
+	int range;                      // range is [0:range)
 	
 // private code operations:	
-	void randomCode();
-	void getGuessCode();
+	void randomCode();              // generates random secret code
+	void getGuessCode();            // lets user input the code
 };

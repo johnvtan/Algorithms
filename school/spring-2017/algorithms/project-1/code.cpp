@@ -62,7 +62,7 @@ void code::getGuessCode()
 		{
 			cout << "Invalid input. Enter an integer value." << endl;
 			cin.clear();
-			cin.ignore();
+			cin.ignore(256, '\n');
 			i--;
 		}
 		
@@ -73,13 +73,15 @@ void code::getGuessCode()
 			cout << "Enter another value, between 0 and " << range - 1 << endl;
 			i--;
 		}
+
+                // otherwise, the input value is valid and we add it to the vector
 		else 
 		{
 			sequence.push_back(val);
 		}
 	}
 	
-} // end code 
+} // end getGuessCode 
 
 int code::checkCorrect(const code &c) const
 // Returns the number of digits which are the correct value and in the correct 
@@ -114,7 +116,7 @@ int code::checkIncorrect(const code &c) const
 	
 	int numIncorrect = 0; // the number correct, to be returned
 	
-	// index points of both sequences
+	// index points of both sequences - used for iterating
 	int secretI = 0;
 	int guessI = 0;
 	
@@ -122,52 +124,80 @@ int code::checkIncorrect(const code &c) const
 	vector<int> checkedGuessIndexes;
 	
 	
+        // tracks if the current index of the guess code was already matched
 	bool checkedAlready = false;
 	
-	// increment through the sequences until you reach the end of either
-	while (secretI < length ) 
+	// increment through the sequences until we reach the end of either sequence
+	while (secretI < length) 
 	{
 		// goes through checkedGuessIndexes to see if guessI has been checked
-		for (int i = 0; i < checkedGuessIndexes.size(); i ++) 
+		for (int i = 0; i < checkedGuessIndexes.size(); i++) 
 		{
 			if (checkedGuessIndexes[i] == guessI)
 			{
+                
+                                // we set this true so that we skip the section below and prevent double counting
 				checkedAlready = true;
 			}	
 		}
 		
+                // if we haven't matched this index of the guess code already
 		if (!checkedAlready) 
 		{
-			// if the two values are equal
+		
+                	// if the two values are equal
 			if (secretSequence[secretI] == guessSequence[guessI]) 
 			{
-				numIncorrect ++;
-				secretI ++;
+                
+                                // first we want to increment our numIncorrect count
+				numIncorrect++;
+
+                                // then move on to the next value in the secret code
+				secretI++;
+
+                                // then we append the guess index onto the checked vector to prevent double
+                                // counting
 				checkedGuessIndexes.push_back(guessI);
+
+                                // reset the guess code index to start at the beginning again
 				guessI = 0;	
 			}
 			
 			// if the two values are not equal
 			else 
 			{
+
+                                // move on to the next guess code value
 				guessI++;
 				
+                                // if we've reached the end of the guess code and we haven't found a match
 				if (guessI >= guessSequence.size()) {
+
+                                        // reset guess code index to beginning
 					guessI = 0;
+
+                                        // move on to the next value in the secret code
 					secretI++;
 				}
 			}
 		}
 		
-		else {
+                // if we have matched this index of the guess code
+		else 
+                {
+                        // move on to the next value in the guess code 
 			guessI++;
+
+                        // reset to false to be ready for next cycle
 			checkedAlready = false;
 		}
 		
 	}
 	
+        // we have to subtract the number of values in the correct place since otherwise
+        // we're double counting the correct count using this method
 	return numIncorrect - checkCorrect(c); 
-}
+} // end guessIncorrect
 
 int code::getIndex(int i) const 
 // returns the value of the sequence at index "i"
