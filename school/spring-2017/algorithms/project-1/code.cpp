@@ -43,7 +43,8 @@ void code::getGuessCode()
 // gets the values of sequence from the user (their guess code)
 {
 	
-	// empties the sequence of it's current values, so new values can be added
+	// empties the sequence of it's current values, so new values can be
+        // added
 	sequence.clear();
 	
 	// prompt the user for their guess code, 1 value at a time
@@ -136,7 +137,8 @@ int code::checkIncorrect(const code &c) const
 			if (checkedGuessIndexes[i] == guessI)
 			{
                 
-                                // we set this true so that we skip the section below and prevent double counting
+                                // we set this true so that we skip the section below
+                                // and prevent double counting
 				checkedAlready = true;
 			}	
 		}
@@ -155,8 +157,8 @@ int code::checkIncorrect(const code &c) const
                                 // then move on to the next value in the secret code
 				secretI++;
 
-                                // then we append the guess index onto the checked vector to prevent double
-                                // counting
+                                // then we append the guess index onto the checked vector to 
+                                // prevent double counting
 				checkedGuessIndexes.push_back(guessI);
 
                                 // reset the guess code index to start at the beginning again
@@ -170,7 +172,8 @@ int code::checkIncorrect(const code &c) const
                                 // move on to the next guess code value
 				guessI++;
 				
-                                // if we've reached the end of the guess code and we haven't found a match
+                                // if we've reached the end of the guess code and we haven't
+                                // found a match
 				if (guessI >= guessSequence.size()) {
 
                                         // reset guess code index to beginning
