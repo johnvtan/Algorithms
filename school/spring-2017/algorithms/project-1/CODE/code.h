@@ -3,6 +3,9 @@
 
 // This file declares the "code" class
 
+#ifndef Included_code_H
+#define Included_code_H
+
 #include <vector>
 using namespace std;
 
@@ -10,8 +13,8 @@ class code
 {
 public:
 // constructors:	
-	code(int n, int m);
-	code(const code &secretCode);
+	code(int n, int m); 			// n = length of code, m = range of values
+	code(const code &secretCode);	// gets human response
 	
 // public code operations:	
 	int checkCorrect(const code &c) const;
@@ -31,3 +34,5 @@ private:
 	void randomCode();              // generates random secret code
 	void getGuessCode();            // lets user input the code
 };
+
+#endif

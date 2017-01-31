@@ -27,23 +27,32 @@ void response::setIncorrect(int x)
 	numIncorrect = x;
 }
 
-int response::getCorrect()
+int response::getCorrect() const
 // getter function for the "response" class's numCorrect data member
 {
 	return numCorrect;
 }
 
-int response::getIncorrect()
+int response::getIncorrect() const
 // getter function for the "response" class's numIncorrect data member
 {
 	return numIncorrect;
 }
 
 ostream& operator<< (ostream& ostr, const response& r)
-// the friend operator overloader which overloads the operator "<<" for a response
+// the friend operator overloader which overloads the operator "<<" for a 
+// response
 {
 	ostr << "Number Correct: " << r.numCorrect << endl
 		 << "Number Incorrect: " << r.numIncorrect << endl;
 		 
 	return ostr;
+}
+
+bool operator== (const response& r1, const response& r2)
+// the friend operator overloader which overloads the operator "==" for two 
+// reponses
+{
+	return (r1.getCorrect() == r2.getCorrect())
+		&& (r1.getIncorrect() == r2.getIncorrect());
 }
