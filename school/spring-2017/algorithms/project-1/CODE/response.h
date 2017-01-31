@@ -10,7 +10,8 @@ using namespace std;
 
 class response {
 	public: 
-		response(int c, int i);
+		response(int c, int i);	
+		response() { };
 		void setCorrect(int x);
 		void setIncorrect(int x);
 		int getCorrect() const;

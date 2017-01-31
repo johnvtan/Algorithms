@@ -58,10 +58,12 @@ void mastermind::playGame()
 {
 	int guessesLeft = 10;
 	bool isGameWon = false;
+	
+	cout << "Secret Code: ";
+	printSecretCode();
+	
 	code currentGuess;
 	response currentResponse;
-	
-	cout << "Secret Code: " << printSecretCode();
 	
 	// iterates until either:
 	//  - the user runs out of guesses 

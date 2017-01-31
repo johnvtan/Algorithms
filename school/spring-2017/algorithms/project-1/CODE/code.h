@@ -12,9 +12,10 @@ using namespace std;
 class code 
 {
 public:
-// constructors:	
+// constructors:
 	code(int n, int m); 			// n = length of code, m = range of values
 	code(const code &secretCode);	// gets human response
+	code() { };						// default, don't set data members
 	
 // public code operations:	
 	int checkCorrect(const code &c) const;

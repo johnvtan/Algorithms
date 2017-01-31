@@ -8,7 +8,7 @@
 using namespace std;
 
 response::response(int c, int i) 
-// constructor for "response" class object
+// constructor for a "response" class object
 // c is the number correct, and i is the number incorrect
 {
 	setCorrect(c);
