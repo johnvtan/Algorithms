@@ -39,13 +39,6 @@ code::code(const code &secretCode)
 	
 } // end code constructor
 
-//code::code()
-//// default constructor for the "code" class, where the length is set to 5, 
-//// and the range is set to 10
-//{
-//	
-//}
-
 void code::getGuessCode() 
 // gets the values of sequence from the user (their guess code)
 {
