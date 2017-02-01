@@ -87,6 +87,9 @@ void mastermind::playGame()
 		
 		// checks if the game has been won
 		isGameWon = isSolved(currentResponse);
+
+                // decrement guessesLeft
+                guessesLeft--;
 	}
 	
 	// When we get here, the game is over
