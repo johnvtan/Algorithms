@@ -43,6 +43,8 @@ ostream& operator<< (ostream& ostr, const response& r)
 // the friend operator overloader which overloads the operator "<<" for a 
 // response
 {
+        // we overload the operator to print out the correct and incorrect
+        // numbers on separate lines
 	ostr << "Number Correct: " << r.numCorrect << endl
 		 << "Number Incorrect: " << r.numIncorrect << endl;
 		 
@@ -53,6 +55,8 @@ bool operator== (const response& r1, const response& r2)
 // the friend operator overloader which overloads the operator "==" for two 
 // reponses
 {
+        // we say responses are equal of the numCorrect and numIncorrect are 
+        // both equal
 	return (r1.getCorrect() == r2.getCorrect())
 		&& (r1.getIncorrect() == r2.getIncorrect());
 }

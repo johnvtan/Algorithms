@@ -29,12 +29,13 @@ int main()
 	// ask the user for length and range
 	cout << "Enter the desired length of the secret code: ";
 	cin >> length;
-	cout << "Enter the desired range of values (0, x]";
+	cout << "Enter the desired range of values (0, x]: ";
 	cin >> range;
 	
-	// 
+	// initializing the mastermind object
 	mastermind m(length, range);
 	
+        // playing the game
 	m.playGame();
 
 	return 0;

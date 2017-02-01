@@ -12,13 +12,18 @@ using namespace std;
 
 class mastermind {
 	public:
-		mastermind(int n, int m); // n = length, m = range
-		mastermind();			  // n = 5, m = 10 (needed?)
-		void printSecretCode() const;
-		code humanGuess() const;
+                
+                // Constructors
+		mastermind(int n, int m);         // n = length, m = range
+		mastermind();			  // n = 5, m = 10 - default
+    
+                // Public member functions
+		void printSecretCode() const;   
+		code humanGuess() const;          // retrieves user guess
 		response getResponse(const code &guessCode) const;
-		bool isSolved(response r) const;
-		void playGame();
+		bool isSolved(response r) const;  // checks if user won
+		void playGame();                  // runs a single mastermind 
+                                                  // game
 	private:
-		code secretCode;
+		code secretCode;                // stores secret code object
 };

@@ -2,17 +2,18 @@
 // Project 1
 
 // This file implements the methods of the "response" class
-//#include<iostream>
-#include"mastermind.h"
-//#include "code.h"
 
+#include"mastermind.h"
 using namespace std;
 
 mastermind::mastermind(int n, int m) 
 // constructor for "mastermind" class object
 // n is the length of the secretCode, and m is the range of values in the code
 {
-	code secret(n, m);
+        // initializing the secret code by calling code constructor
+    	code secret(n, m);
+
+        // setting our secretCode data member to the newly created code
 	secretCode = secret;
 }
 
@@ -56,19 +57,24 @@ void mastermind::playGame()
 // until the codemaker wins (guesses the code correctly) or loses (runs out of
 // the ten available guesses)
 {
+
+        // local variables to track state of the game
 	int guessesLeft = 10;
 	bool isGameWon = false;
 	
+        // printing out the secret code for testing purposes
 	cout << "Secret Code: ";
 	printSecretCode();
 	
+        // variables to track the current guess and correctness of that guess
 	code currentGuess;
 	response currentResponse;
 	
-	// iterates until either:
-	//  - the user runs out of guesses 
-	//  - the user wins the game
-	while(guessesLeft > 0 && !isGameWon) {
+	// iterates until either the user runs out of guesses or the user wins
+        // the game
+	while(guessesLeft > 0 && !isGameWon)
+        {
+
 		// prints the current guess count
 		cout << "Guesses left: " << guessesLeft << endl;
 		
@@ -83,13 +89,16 @@ void mastermind::playGame()
 		isGameWon = isSolved(currentResponse);
 	}
 	
-	// end of game
-	// if the user won:
-	if (isGameWon) {
+	// When we get here, the game is over
+	if (isGameWon) 
+        {
+                // isGameWon flag only set if the user guesses correctly
 		cout << "Congrats! You won!" << endl;
 	}
-	else {
+	else 
+        {
+                // user loses if they couldn't guess right within 10 guesses
 		cout << "You ran out of guesses. You lose." << endl;
 	}
 	
-}
+} // end playGame()
