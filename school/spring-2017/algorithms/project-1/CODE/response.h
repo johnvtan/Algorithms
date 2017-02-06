@@ -11,7 +11,7 @@ using namespace std;
 class response {
 	public:
 
-                // Constructors 
+        // Constructors 
 		response(int c, int i);	        
 		response() { };                 // empty constructor
             
