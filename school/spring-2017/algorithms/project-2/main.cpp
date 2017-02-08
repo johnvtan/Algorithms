@@ -10,7 +10,8 @@ int main() {
 	//card c(heart, ace);
 	
 	//cout << c;
-	deck d();
+	cout << "Initializing deck...\n";
+        deck d;
 	
 	
 	return 0;

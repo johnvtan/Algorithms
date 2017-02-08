@@ -4,7 +4,7 @@
 // This file implements the methods of the "deck" class
 
 #include"deck.h"
-
+#include <iostream>
 using namespace std;
 
 deck::deck() 
@@ -13,13 +13,13 @@ deck::deck()
 	cardNode curr; // tracks where we are as we add cards to the deck
 	first = curr; // the deck starts here
 	
-	cout << "test";
+	
 	// iterates through the card values
-	for(int valueInt = ace; valueInt != king; valueInt++ )
+	for(int valueInt = ace; valueInt != END_VAL ; valueInt++)
 	{
-		cout <<"test";
+		
 		// iterates through the card suits
-		for (int suitInt = club; suitInt != spade; suitInt++)
+		for (int suitInt = club; suitInt != END_SUIT; suitInt++)
 		{
 			card c(static_cast<suit>(suitInt), static_cast<value>(valueInt));
 			cardNode newCard(c);

@@ -18,7 +18,7 @@ card::card(suit s, value v)
 ostream& operator<< (ostream& ostr, const card& c)
 // overloads the << operator
 {
-	ostr << c.valueToString() << " of " << c.suitToString();	
+	ostr << c.valueToString() << " of " << c.suitToString() << endl;	
 }
 
 string card::suitToString() const

@@ -11,14 +11,14 @@ using namespace std;
 typedef enum 
 // represents a card suit
 {
-	club, diamond, heart, spade
+	club, diamond, heart, spade, END_SUIT
 } suit;
 
 typedef enum 
 // represents a card value
 {
 	ace, two, three, four, five, six, seven, eight, nine, ten, jack, queen, 
-	king
+	king, END_VAL
 } value;
 
 class card 
