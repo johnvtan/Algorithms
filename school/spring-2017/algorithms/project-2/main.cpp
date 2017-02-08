@@ -13,6 +13,7 @@ int main() {
 	cout << "Initializing deck...\n";
         deck d;
 	
-	
+
+        cout << d;	
 	return 0;
 }

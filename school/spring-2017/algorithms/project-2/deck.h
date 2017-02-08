@@ -3,6 +3,7 @@
 
 // This file declares the "deck" class, which represents a deck of cards
 #include"card.h"
+#include <iostream>
 
 class cardNode
 {
@@ -13,9 +14,11 @@ class cardNode
 		
 		// constructors
 		cardNode() {}
-		cardNode(const card& card, cardNode *nextNode = NULL) {
-			c = card;
-			next = nextNode;
+        
+                // changed, but we never use this anyway
+		cardNode(const cardNode& head) {
+			c = head.c;
+			next = head.next;
 		}
 	
 };
@@ -26,8 +29,9 @@ class deck
 		deck();
 		//void printDeck();
 	
+               friend ostream& operator<< (ostream& ostr, const cardNode& head);
 	private:
-		cardNode first;
+		cardNode* first;
 	
 	
 

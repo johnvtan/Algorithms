@@ -10,8 +10,8 @@ using namespace std;
 deck::deck() 
 // default constructor, creates a standard deck of 52 cards
 {	
-	cardNode curr; // tracks where we are as we add cards to the deck
-	first = curr; // the deck starts here
+	//cardNode* curr; // tracks where we are as we add cards to the deck
+	//first = cardNode(; // the deck starts here
 	
 	
 	// iterates through the card values
@@ -20,12 +20,29 @@ deck::deck()
 		
 		// iterates through the card suits
 		for (int suitInt = club; suitInt != END_SUIT; suitInt++)
-		{
-			card c(static_cast<suit>(suitInt), static_cast<value>(valueInt));
-			cardNode newCard(c);
-			cout << c;
-			curr.next = &newCard;
-			curr = newCard;
+		{       
+                        
+			card ca(static_cast<suit>(suitInt), static_cast<value>(valueInt));
+			cardNode* newCard = new cardNode;
+                        newCard->c = ca; 
+                        cout << ca;
+                        newCard->next = NULL;
+                        
+                        // pointing current node to first
+                        newCard->next = first;
+                        first = newCard; 
+                        
 		}
 	}
 }
+
+ostream& operator << (ostream& ostr, cardNode* head)
+{
+    cardNode* curr = head;
+    while(curr->next != NULL)
+    {
+        ostr << curr->c;
+        curr = curr->next;
+    }
+    return ostr;
+} 
