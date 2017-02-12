@@ -5,6 +5,7 @@
 
 #include"deck.h"
 #include <iostream>
+
 using namespace std;
 
 deck::deck() 
@@ -25,7 +26,7 @@ deck::deck()
 			card ca(static_cast<suit>(suitInt), static_cast<value>(valueInt));
 			cardNode* newCard = new cardNode;
                         newCard->c = ca; 
-                        cout << ca;
+                        //cout << ca ;
                         newCard->next = NULL;
                         
                         // pointing current node to first
@@ -36,13 +37,15 @@ deck::deck()
 	}
 }
 
-ostream& operator << (ostream& ostr, cardNode* head)
+ostream& operator<< (ostream& ostr, deck& d)
 {
-    cardNode* curr = head;
+    cardNode* curr = d.getHead();
+    
     while(curr->next != NULL)
     {
         ostr << curr->c;
         curr = curr->next;
     }
+    ostr << endl;
     return ostr;
 } 

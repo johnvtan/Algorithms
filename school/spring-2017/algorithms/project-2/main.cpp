@@ -3,6 +3,7 @@
 
 //#include"card.h"
 #include"deck.h"
+//#include<iostream>
 
 using namespace std;
 
@@ -11,9 +12,8 @@ int main() {
 	
 	//cout << c;
 	cout << "Initializing deck...\n";
-        deck d;
+    deck d;
 	
-
-        cout << d;	
+    cout << d;	
 	return 0;
 }
