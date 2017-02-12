@@ -4,7 +4,6 @@
 // This file implements the methods of the "card" class
 
 #include"card.h"
-//#include<string.h>
 
 using namespace std;
 

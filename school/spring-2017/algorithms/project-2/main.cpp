@@ -1,19 +1,26 @@
 // Mary Forde, John Tan
 // Project 2
 
-//#include"card.h"
+// Initializes a deck, prints it, then shuffles the deck and prints the
+// shuffled deck.
+
 #include"deck.h"
-//#include<iostream>
+#include<time.h>
 
 using namespace std;
 
 int main() {
-	//card c(heart, ace);
-	
-	//cout << c;
-	cout << "Initializing deck...\n";
+	// random seed
+	srand(time(NULL));
     deck d;
 	
-    cout << d;	
+	cout << "Not shuffled:\n";
+    cout <<  d;	
+    
+    d.shuffle();
+    
+    cout << "\nShuffled:\n";
+    cout << d;
+
 	return 0;
 }
