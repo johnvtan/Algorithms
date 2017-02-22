@@ -29,10 +29,14 @@ class card
 		// constructors:
 		card(suit s, value v);
 		card() {}
+		card(const card &obj);
 		
 		// getter methods:
 		value getValue() const { return cardVal; }
 		suit getSuit() const { return cardSuit; }
+		
+		// overloaded assignment operator
+		card& operator= (const card& rhs);
 		
 		// overloaded cout operator
 		friend ostream& operator<< (ostream& ostr, const card& c);

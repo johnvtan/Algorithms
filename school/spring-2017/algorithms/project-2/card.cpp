@@ -14,11 +14,26 @@ card::card(suit s, value v)
 	setSuit(s);
 }
 
+card::card(const card &obj) 
+// copy constructor for a card
+{
+	setValue(obj.getValue());
+	setSuit(obj.getSuit());
+}
+
 ostream& operator<< (ostream& ostr, const card& c)
 // overloads the << operator
 {
 	ostr << c.valueToString() << " of " << c.suitToString() << endl;	
 }
+
+card& card::operator= (const card& rhs)
+// overloads the = (assignment) operator
+{
+	setValue(rhs.getValue());
+	setSuit(rhs.getSuit());
+	return *this;
+}// end operator=
 
 string card::suitToString() const
 // returns this card's suit, as a string (ex: "Spades")
@@ -33,7 +48,7 @@ string card::suitToString() const
 		case diamond: 
 			return "Diamonds";
 	}
-}
+} //end suitToString
 
 string card::valueToString() const
 // returns this card's value, as a string (ex: "Ace", "2")
@@ -66,5 +81,5 @@ string card::valueToString() const
 		case king: 
 			return "King";				
 	}
-}
+} //end valueToString
 

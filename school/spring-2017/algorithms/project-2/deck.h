@@ -11,10 +11,14 @@ class deck
 		// constructor
 		deck();
 		
+		// destructor
+		~deck();
+		
 		// public deck operations
 		node<card>* getHead() { return first; }
-		void printDeck();
 		void shuffle();
+		card deal();
+		void replace(const card& c);
 	
 		// cout overloader
         friend ostream& operator<< (ostream& ostr, deck& d);

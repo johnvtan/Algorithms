@@ -10,6 +10,8 @@ using namespace std;
 deck::deck() 
 // default constructor, creates a standard deck of 52 cards
 {	
+	first=NULL;
+
 	// iterates through the card values
 	for (int suitInt = spade; suitInt != END_SUIT; suitInt++)
 	{
@@ -30,7 +32,24 @@ deck::deck()
             first = newCard;        
 		}
 	}
+	
+	
 } // end default constructor
+
+
+deck::~deck()
+//destructor
+{
+	while(first->next != NULL)
+	{
+		node<card>* next = first->next;
+		delete first;
+		first = next;	
+	}
+	
+	delete first;
+	first = NULL;
+} // end destructor
 
 ostream& operator<< (ostream& ostr, deck& d)
 // overloads the cout operator to print the full deck
@@ -86,4 +105,31 @@ void deck::shuffle()
 		swap(rand1, rand2);
 	}
 } // end shuffle
+
+card deck::deal() 
+// returns the top cards of the deck, and removes it from the deck
+{
+	card c(first->nodeValue);
+	
+	first = first->next;
+	
+	return c;
+} // end deal
+
+void deck::replace(const card& c) 
+// adds the given card to the bottom of the deck
+{
+	node<card>* curr = first;
+	
+	while (curr->next != NULL) 
+	{
+		curr = curr->next;
+	}
+	
+	node<card> *newCard = new node<card>;
+	newCard->nodeValue = c;
+	newCard->next = NULL;
+		
+	curr->next = newCard;
+}
 

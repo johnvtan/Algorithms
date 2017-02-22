@@ -12,15 +12,16 @@ using namespace std;
 int main() {
 	// random seed
 	srand(time(NULL));
-    deck d;
-	
-	cout << "Not shuffled:\n";
-    cout <<  d;	
-    
-    d.shuffle();
-    
-    cout << "\nShuffled:\n";
-    cout << d;
 
+	deck d;
+	
+    card c;
+	c = d.deal();
+    
+    d.replace(c);
+    
+	//cout << "c: " << c;  
+    cout << "deck: " << d;
+        
 	return 0;
 }
