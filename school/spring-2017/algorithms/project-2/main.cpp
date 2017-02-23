@@ -1,27 +1,18 @@
 // Mary Forde, John Tan
 // Project 2
 
-// Initializes a deck, prints it, then shuffles the deck and prints the
-// shuffled deck.
+// Starts a game of playFlip.
 
-#include"deck.h"
-#include<time.h>
+#include"playFlip.h"
 
 using namespace std;
 
-int main() {
-	// random seed
-	srand(time(NULL));
-
-	deck d;
-	
-    card c;
-	c = d.deal();
-    
-    d.replace(c);
-    
-	//cout << "c: " << c;  
-    cout << "deck: " << d;
+int main()
+// starts a game of playFlip
+{
+	playFlip();
         
 	return 0;
 }
+
+

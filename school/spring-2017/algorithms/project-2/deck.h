@@ -10,6 +10,7 @@ class deck
 	public:
 		// constructor
 		deck();
+		deck(const card& c);
 		
 		// destructor
 		~deck();
@@ -19,6 +20,7 @@ class deck
 		void shuffle();
 		card deal();
 		void replace(const card& c);
+		card atIndex(int i);
 	
 		// cout overloader
         friend ostream& operator<< (ostream& ostr, deck& d);

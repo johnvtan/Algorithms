@@ -36,6 +36,16 @@ deck::deck()
 	
 } // end default constructor
 
+deck::deck(const card& c)
+// creates a deck which only contains the given card
+{
+	node<card>* newCard = new node<card>();
+	newCard->nodeValue = c;
+	newCard->next = NULL;
+	
+	first = newCard;
+}
+
 
 deck::~deck()
 //destructor
@@ -131,5 +141,18 @@ void deck::replace(const card& c)
 	newCard->next = NULL;
 		
 	curr->next = newCard;
+}
+
+card deck::atIndex(int i)
+// returns the card at the given index of the deck
+{
+	node<card>* curr = first;
+	
+	for (int j = 0; j < i; j++)
+	{
+		curr = curr->next;
+	}
+	
+	return curr->nodeValue;
 }
 

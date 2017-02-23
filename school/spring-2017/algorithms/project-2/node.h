@@ -1,3 +1,8 @@
+// Mary Forde, John Tan
+// Project 2
+
+// This file declares and implements the "node" class
+
 #ifndef NODE_CLASS
 #define NODE_CLASS
 
