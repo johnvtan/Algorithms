@@ -42,9 +42,8 @@ void playFlip()
 		playerHand.replace(d.deal());
 	}
 	
-	
-	cout << "Remaining deck (without top 24 cards): " << endl << d << endl << endl;
 	cout << "Top 24 cards: " << endl << playerHand << endl;
+	cout << "Remaining deck (without top 24 cards): " << endl << d << endl << endl;
 	
 	int flipOrEndGameChoice;
 	int cardIndexChoice;
@@ -54,6 +53,7 @@ void playFlip()
 	
 	while (!checkIfEndGame())
 	{
+		cout << "Top 24 cards: " << endl << playerHand << endl;
 		
 		while (true) {
 			
