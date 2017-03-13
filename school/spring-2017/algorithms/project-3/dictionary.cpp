@@ -68,8 +68,8 @@ void dictionary::selectionSort()
 	}
 }
 
-bool dictionary::binarySearch(const string& findThis)
-// tries to find the given string in this dictionary, returns true if found
+signed int dictionary::binarySearch(const string& findThis)
+// tries to find the given string in this dictionary, returns the index if found, otherwise -1
 {
 	int first = 0;
 	int last = words.size() - 1;
@@ -82,12 +82,12 @@ bool dictionary::binarySearch(const string& findThis)
 		midValue = words.at(mid);
 		
 		if (findThis == midValue)
-			return true;
+			return mid;
 		else if (findThis < midValue) 
 			last = mid - 1;
 		else
 			first = mid + 1;
 	}
 	
-	return false; // if we iterate through the whole dictionary
+	return -1; // if we iterate through the whole dictionary
 }

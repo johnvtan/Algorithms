@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0000000000000000001000000
-UnitCount=5
+UnitCount=8
 
 [VersionInfo]
 Major=1
@@ -91,7 +91,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit6]
-FileName=dictionary.cpp
+FileName=grid.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -101,7 +101,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit7]
-FileName=main.cpp
+FileName=global.cpp
 CompileCpp=1
 Folder=
 Compile=1
@@ -112,6 +112,16 @@ BuildCmd=
 
 [Unit3]
 FileName=dictionary.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit8]
+FileName=grid.cpp
 CompileCpp=1
 Folder=
 Compile=1

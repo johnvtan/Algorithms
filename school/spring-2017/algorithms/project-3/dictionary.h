@@ -12,7 +12,7 @@ class dictionary {
 		dictionary(char* fileName);
 		
 		void selectionSort();
-		bool binarySearch(const string& findThis);
+		signed int binarySearch(const string& findThis);
 		
 		friend ostream& operator<<(ostream& ostr, dictionary& dict);
 	
