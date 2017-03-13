@@ -10,21 +10,24 @@ using namespace std;
 class grid
 {
 	public:
+		// constructor
 		grid(char* filename);
 		
+		// getter method
 		vector<string> getPossibleWords();
-		
+		matrix<char> getWordGrid();		
+	
+		// overloaded cout operator
 		friend ostream& operator<<(ostream& ostr, grid& g);
 		
-		
-		vector<string> possibleWords;
-		void possibleWordsAt(int startRow, int startCol);
 	
 	private:
+		// private data members 
 		matrix<char> wordGrid;
-		
-		
+		vector<string> possibleWords;
+
+		// helper methods for constructor
+		void possibleWordsAt(int startRow, int startCol);
 		void generatePossibleWords();
 		void generatePossibleWordsIncrementBy(int startRow, int startCol, int horInc, int vertInc);
-		//void possibleWordsAt(int row, int col);
 };

@@ -22,9 +22,9 @@ grid::grid(char* filename)
 		
 		char c;
 			
-		for (int i = 0; i < numCols; i ++) 
+		for (int i = 0; i < numRows; i ++) 
 		{
-			for (int j = 0; j < numRows; j++) 
+			for (int j = 0; j < numCols; j++) 
 			{
 				myFile >> wordGrid[i][j];
 			}
@@ -33,9 +33,35 @@ grid::grid(char* filename)
 	
 	myFile.close();
 	
-	//generatePossibleWords();		
+	generatePossibleWords();		
 }
 
+vector<string> grid::getPossibleWords()
+// returns the possible words vector 
+{
+    return possibleWords;
+}
+
+matrix<char> grid::getWordGrid()
+// returns word grid matrix
+{
+    return wordGrid;
+}
+
+void grid::generatePossibleWords()
+// generates all possible words in the word search grid
+{
+    int numRows = wordGrid.rows();
+    int numCols = wordGrid.cols();
+    
+    for(int i = 0; i < numRows; i++)
+    {
+        for(int j = 0; j < numCols; j++)
+        {
+            possibleWordsAt(i, j);
+        }
+    }
+} // end generatePossibleWords
 
 void grid::possibleWordsAt(int startRow, int startCol)
 // generates all the possible words to the right of the starting 

@@ -12,11 +12,13 @@ using namespace std;
 dictionary::dictionary(char* fileName) 
 // constructs a dictionary instance, from the given file
 {
+	// opening file
 	ifstream myFile;
 	myFile.open(fileName);
 	
 	if(myFile.is_open()) 
 	{
+		// getting input one line at a time and appending
 		string line;
 		while(getline(myFile, line)) 
 		{
