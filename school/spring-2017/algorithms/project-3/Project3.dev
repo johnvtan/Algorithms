@@ -1,6 +1,6 @@
 [Project]
-FileName=Project2.dev
-Name=Project1
+FileName=Project3.dev
+Name=Project3
 Type=1
 Ver=2
 ObjFiles=
@@ -24,11 +24,11 @@ HostApplication=
 UseCustomMakefile=0
 CustomMakefile=
 CommandLine=
-Folders=
+Folders=Other
 IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
-CompilerSettings=0000000000000000000000000
+CompilerSettings=0000000000000000001000000
 UnitCount=8
 
 [VersionInfo]
@@ -51,7 +51,7 @@ AutoIncBuildNr=0
 SyncProduct=1
 
 [Unit1]
-FileName=card.cpp
+FileName=d_matrix.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -61,7 +61,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit2]
-FileName=card.h
+FileName=d_except.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -71,14 +71,14 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit4]
-FileName=deck.h
-CompileCpp=1
+FileName=dictionary.cpp
 Folder=
 Compile=1
 Link=1
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
+CompileCpp=1
 
 [Unit5]
 FileName=main.cpp
@@ -91,7 +91,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit6]
-FileName=node.h
+FileName=grid.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -101,7 +101,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit7]
-FileName=playFlip.h
+FileName=global.cpp
 CompileCpp=1
 Folder=
 Compile=1
@@ -111,7 +111,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit3]
-FileName=deck.cpp
+FileName=dictionary.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -121,7 +121,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit8]
-FileName=playFlip.cpp
+FileName=grid.cpp
 CompileCpp=1
 Folder=
 Compile=1

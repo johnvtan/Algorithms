@@ -1,19 +1,18 @@
 // Mary Forde, John Tan
 // Project 2
 
-//#include"card.h"
-#include"deck.h"
-//#include<iostream>
+// Starts a game of playFlip.
+
+#include"playFlip.h"
 
 using namespace std;
 
-int main() {
-	//card c(heart, ace);
-	
-	//cout << c;
-	cout << "Initializing deck...\n";
-    deck d;
-	
-    cout << d;	
+int main()
+// starts a game of playFlip
+{
+	playFlip();
+        
 	return 0;
 }
+
+

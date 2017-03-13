@@ -3,18 +3,33 @@
 
 // This file declares the "deck" class, which represents a deck of cards
 #include"card.h"
-#include"cardNode.h"
+#include"node.h"
 
 class deck
 {
 	public:
+		// constructor
 		deck();
-		cardNode* getHead() { return first; }
-		void printDeck();
+		deck(const card& c);
+		
+		// destructor
+		~deck();
+		
+		// public deck operations
+		node<card>* getHead() { return first; }
+		void shuffle();
+		card deal();
+		void replace(const card& c);
+		card atIndex(int i);
 	
+		// cout overloader
         friend ostream& operator<< (ostream& ostr, deck& d);
-	
+        
 	private:
-		cardNode* first;
-	
+		// data members
+		node<card>* first;
+		
+		// private deck operations
+		node<card>* getNodeAtIndex(int i);
+		void swap(int i1, int i2);
 };
