@@ -1,6 +1,4 @@
-#include "dictionary.h"
-#include "grid.h"
-#include <iostream>
+#include"global.h"
 
 using namespace std;
 
@@ -15,10 +13,22 @@ void findMatches(dictionary& d, grid& g)
 
     for(int i = 0; i < possibleWords.size(); i++)
     {
-	index = d.binarySearch(possibleWords[i]);
-	if(index >= 0)
-	{
-	    cout << "Found: " << possibleWords[i] << endl;
-	}
+		index = d.binarySearch(possibleWords[i]);
+		if(index >= 0 && possibleWords[i].length() >= 5)
+		{
+	   		cout << "Found: " << possibleWords[i] << endl;
+		}
     }
+}
+
+void search(string gridFileName)
+// Prints out all the words that can be found in the grid
+{
+	dictionary d("Dictionary.txt");
+	d.selectionSort();
+	char* gridFileNameChar;
+	strcpy(gridFileNameChar, gridFileName);
+	grid g(gridFileNameChar);
+	
+	findMatches(d, g);	
 }

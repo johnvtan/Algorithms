@@ -68,7 +68,7 @@ void dictionary::selectionSort()
 			swap(i, minIndex);
 		}
 	}
-}
+}// end selectionSort
 
 signed int dictionary::binarySearch(const string& findThis)
 // tries to find the given string in this dictionary, returns the index if found, otherwise -1
@@ -92,4 +92,4 @@ signed int dictionary::binarySearch(const string& findThis)
 	}
 	
 	return -1; // if we iterate through the whole dictionary
-}
+}//end binarySearch
