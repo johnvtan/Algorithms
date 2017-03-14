@@ -9,7 +9,7 @@
 
 using namespace std;
 
-dictionary::dictionary(char* fileName) 
+dictionary::dictionary(const char* fileName) 
 // constructs a dictionary instance, from the given file
 {
 	// opening file
@@ -45,7 +45,7 @@ void dictionary::swap(int i, int j)
 	temp = words.at(i);
 	words.at(i) = words.at(j);
 	words.at(j) = temp;
-}
+} // end swap
 
 void dictionary::selectionSort()
 // sorts the dictionary using selection sort
@@ -68,7 +68,7 @@ void dictionary::selectionSort()
 			swap(i, minIndex);
 		}
 	}
-}
+} // end selectionSort
 
 signed int dictionary::binarySearch(const string& findThis)
 // tries to find the given string in this dictionary, returns the index if found, otherwise -1
@@ -92,4 +92,4 @@ signed int dictionary::binarySearch(const string& findThis)
 	}
 	
 	return -1; // if we iterate through the whole dictionary
-}
+} // end binarySearch

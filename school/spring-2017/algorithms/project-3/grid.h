@@ -11,7 +11,7 @@ class grid
 {
 	public:
 		// constructor
-		grid(char* filename);
+		grid(const char* filename);
 		
 		// getter method
 		vector<string> getPossibleWords();

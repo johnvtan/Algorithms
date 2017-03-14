@@ -1,11 +1,12 @@
 // Mary Forde
 // John Tan
 // Project 3
+// This file implements the grid class
 #include"grid.h"
 
 using namespace std;
 
-grid::grid(char* filename)
+grid::grid(const char* filename)
 //constructs a grid from the given file
 {
 	ifstream myFile;
@@ -22,6 +23,7 @@ grid::grid(char* filename)
 		
 		char c;
 			
+		// iterating through and getting all chars in grid
 		for (int i = 0; i < numRows; i ++) 
 		{
 			for (int j = 0; j < numCols; j++) 
@@ -34,13 +36,13 @@ grid::grid(char* filename)
 	myFile.close();
 	
 	generatePossibleWords();		
-}
+} // end grid constructor
 
 vector<string> grid::getPossibleWords()
 // returns the possible words vector 
 {
     return possibleWords;
-}
+} 
 
 matrix<char> grid::getWordGrid()
 // returns word grid matrix
@@ -87,11 +89,13 @@ void grid::possibleWordsAt(int startRow, int startCol)
 	generatePossibleWordsIncrementBy(startRow,startCol,1,-1);
 	// Up Left
 	generatePossibleWordsIncrementBy(startRow,startCol,-1,-1);
-}
+} // end possibleWordsAt
 
 
 void grid::generatePossibleWordsIncrementBy(int startRow, int startCol, int horInc, int vertInc) 
-//
+// Appends all possible strings to the possibleWords vector in grid class, 
+// direction is based on the horizontal increment and vertical increment 
+// arguments
 {
 	int numRows = wordGrid.rows();
 	int numCols = wordGrid.cols();
@@ -105,9 +109,11 @@ void grid::generatePossibleWordsIncrementBy(int startRow, int startCol, int horI
 	
 	while(true) 
 	{
+		// update i,j by increments
 		i += vertInc; //rows
 		j += horInc; //cols
 		
+		// bounds checking indexes if over/under
 		if (vertInc > 0 && i >= numRows)
 		{
 			i = 0;
@@ -127,10 +133,13 @@ void grid::generatePossibleWordsIncrementBy(int startRow, int startCol, int horI
 		
 		if (i == startRow && j == startCol) { break; }
 		
+		// adding char from grid to current word
 		currWord += wordGrid[i][j];
+
+		// appending it to vector
 		possibleWords.push_back(currWord);
 	}
-}
+} // end generatePossibleWordsIncrementBy
 
 
 ostream& operator<<(ostream& ostr, grid& g)
