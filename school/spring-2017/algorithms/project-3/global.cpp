@@ -1,4 +1,4 @@
-#include"global.h"
+#include "global.h"
 
 using namespace std;
 
@@ -6,7 +6,10 @@ void findMatches(dictionary& d, grid& g)
 // Prints out all the words that can be found in the grid.
 {
     // sorting dictionary
+	cout << "Sorting..." << endl;
     d.selectionSort();
+
+	// generating possible words in grid
     vector<string> possibleWords = g.getPossibleWords();
     vector<int> foundWords;
     signed int index;
@@ -14,21 +17,26 @@ void findMatches(dictionary& d, grid& g)
     for(int i = 0; i < possibleWords.size(); i++)
     {
 		index = d.binarySearch(possibleWords[i]);
-		if(index >= 0 && possibleWords[i].length() >= 5)
+		if(index >= 0)
 		{
-	   		cout << "Found: " << possibleWords[i] << endl;
+			// prints out words only if length >= 5
+			if(possibleWords[i].length() >= 5)
+				cout << "Found: " << possibleWords[i] << endl;
 		}
     }
-}
+} // end findMatches
 
-void search(string gridFileName)
-// Prints out all the words that can be found in the grid
+void search()
+// asks for user input for filename, opens the file and initializes grid and
+// dictionary before calling findMatches()
 {
-	dictionary d("Dictionary.txt");
-	d.selectionSort();
-	char* gridFileNameChar;
-	strcpy(gridFileNameChar, gridFileName);
-	grid g(gridFileNameChar);
+	char fileName[255];
+	cout << "Please enter the name of the grid file: ";
+	cin.getline(fileName, 255);
 	
-	findMatches(d, g);	
-}
+	cout << "Opening " << fileName << endl;
+	grid g(fileName);
+	//cout << g << endl;
+	dictionary d("Dictionary.txt");
+	findMatches(d, g);
+} // end search
