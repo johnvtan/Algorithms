@@ -7,8 +7,10 @@ void findMatches(dictionary& d, grid& g)
 {
     // sorting dictionary
 	cout << "Sorting..." << endl;
-    d.selectionSort();
-
+    d.heapSort();
+    
+    cout << "Sorted\n:" << d;
+    
 	// generating possible words in grid
     vector<string> possibleWords = g.getPossibleWords();
     vector<int> foundWords;
