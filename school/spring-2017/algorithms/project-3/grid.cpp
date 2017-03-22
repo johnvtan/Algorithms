@@ -12,6 +12,10 @@ grid::grid(const char* filename)
 	ifstream myFile;
 	myFile.open(filename);
 		
+	if(!myFile.is_open()) 
+	{
+		throw fileOpenError(filename);
+	}	
 	if(myFile.is_open()) 
 	{
 		//get first two integers, which give us the array size

@@ -66,13 +66,11 @@ void dictionary::selectionSort()
 		if (minIndex != i) 
 		{
 			swap(i, minIndex);
+			cout << ".";
 		}
 	}
-<<<<<<< HEAD
 } // end selectionSort
-=======
-}// end selectionSort
->>>>>>> 1e3d689a70f5dbb52a77b7a1b81db701192ead52
+
 
 signed int dictionary::binarySearch(const string& findThis)
 // tries to find the given string in this dictionary, returns the index if found, otherwise -1
@@ -96,8 +94,53 @@ signed int dictionary::binarySearch(const string& findThis)
 	}
 	
 	return -1; // if we iterate through the whole dictionary
-<<<<<<< HEAD
+
 } // end binarySearch
-=======
-}//end binarySearch
->>>>>>> 1e3d689a70f5dbb52a77b7a1b81db701192ead52
+
+
+void dictionary::quickSort()
+// sorts this dictionary using the quick sort algorithm
+{
+	quickSortHelper(0, words.size() - 1);	
+}
+
+void dictionary::quickSortHelper(int left, int right) 
+// sorts this dictionary using the quick sort algorithm
+{
+	if (left < right) 
+	{
+		int s = partition(left, right);
+		quickSortHelper(left, s - 1);
+		quickSortHelper(s + 1, right); 
+	}
+}
+
+int dictionary::partition (int left, int right)
+// helper method for quicksort, partitians the words vector using the given left and
+// right indexes
+{
+	string x = words.at(right);
+	int i = left - 1;
+	for (int j = left; j < right; j++) 
+	{
+		if (words.at(j) <= x) 
+		{
+			i += 1;
+			swap(i, j);
+		}
+	}
+	
+	swap(i + 1, right);
+	
+	return i + 1;
+}
+
+void dictionary::heapSort()
+// sorts the dictionary using the heapSort algorithm
+{
+	heap<string> h(words);
+	
+	h.heapSort();
+	
+}
+
