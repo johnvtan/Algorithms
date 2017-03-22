@@ -24,7 +24,7 @@ HostApplication=
 UseCustomMakefile=0
 CustomMakefile=
 CommandLine=
-Folders=Other
+Folders=
 IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
@@ -141,7 +141,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit10]
-FileName=heap.cpp
+FileName=global.h
 CompileCpp=1
 Folder=
 Compile=1

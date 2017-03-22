@@ -2,14 +2,24 @@
 
 using namespace std;
 
-void findMatches(dictionary& d, grid& g)
+void findMatches(dictionary& d, grid& g, int sortType)
 // Prints out all the words that can be found in the grid.
 {
     // sorting dictionary
 	cout << "Sorting..." << endl;
-    d.heapSort();
-    
-    cout << "Sorted\n:" << d;
+    switch(sortType) {
+    	case 0: 
+			d.selectionSort();
+    		break;
+    	case 1:
+    		d.quickSort();
+    		break;
+    	case 2:
+    		d.heapSort();
+    		break;
+    	default:
+    		cout << "Something went wrong.";
+	}
     
 	// generating possible words in grid
     vector<string> possibleWords = g.getPossibleWords();
@@ -28,7 +38,7 @@ void findMatches(dictionary& d, grid& g)
     }
 } // end findMatches
 
-void search()
+void search(int sortType)
 // asks for user input for filename, opens the file and initializes grid and
 // dictionary before calling findMatches()
 {
@@ -40,5 +50,5 @@ void search()
 	grid g(fileName);
 	//cout << g << endl;
 	dictionary d("Dictionary.txt");
-	findMatches(d, g);
+	findMatches(d, g, sortType);
 } // end search

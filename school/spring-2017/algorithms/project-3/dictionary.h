@@ -1,14 +1,15 @@
 // Mary Forde
 // John Tan
 // Project 3
-#include<string.h>
+#include<string>
 #include<iostream>
 #include<vector>
 #include"heap.h"
 
 using namespace std;
 
-class dictionary {
+class dictionary 
+{
 	public:
 		// constructor
 		dictionary(const char* fileName);
@@ -32,8 +33,5 @@ class dictionary {
 		// private helper methods for quick sort
 		int partition(int left, int right);
 		void quickSortHelper(int left, int right);
-		
-		
-		
-		
+			
 };

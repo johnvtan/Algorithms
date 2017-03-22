@@ -9,4 +9,4 @@
 #include <iostream>
 
 void findMatches(dictionary& d, grid& g);
-void search(void);
+void search(int sortType);
