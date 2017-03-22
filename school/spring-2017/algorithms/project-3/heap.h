@@ -2,8 +2,9 @@
 // John Tan
 // Project 3
 
-// This file declares a heap, which is used for heap sorting
 #include<vector>
+
+// This file declares a heap, which is used for heap sorting
 
 using namespace std;
 

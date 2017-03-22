@@ -1,8 +1,10 @@
 // Mary Forde
 // John Tan
 // Project 3
-// This file implements the grid class
+
 #include"grid.h"
+
+// This file implements the grid class
 
 using namespace std;
 

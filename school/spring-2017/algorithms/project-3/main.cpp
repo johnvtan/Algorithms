@@ -2,9 +2,9 @@
 // John Tan
 // Project 3
 
-// This file runs the global search function 
-
 #include"global.h"
+
+// This file runs the global search function 
 
 using namespace std;
 

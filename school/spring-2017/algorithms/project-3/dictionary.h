@@ -6,6 +6,8 @@
 #include<vector>
 #include"heap.h"
 
+// This represents a dictionary of words.
+
 using namespace std;
 
 class dictionary 
