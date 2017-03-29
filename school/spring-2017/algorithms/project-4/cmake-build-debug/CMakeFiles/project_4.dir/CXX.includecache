@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Mary/Documents/GitHub/Algorithms/school/spring-2017/algorithms/project-4/board.h
+iostream
+-
+limits.h
+-
+d_matrix.h
+C:/Users/Mary/Documents/GitHub/Algorithms/school/spring-2017/algorithms/project-4/d_matrix.h
+d_except.h
+C:/Users/Mary/Documents/GitHub/Algorithms/school/spring-2017/algorithms/project-4/d_except.h
+list
+-
+fstream
+-
+
+C:/Users/Mary/Documents/GitHub/Algorithms/school/spring-2017/algorithms/project-4/d_except.h
+strstream
+-
+string
+-
+
+C:/Users/Mary/Documents/GitHub/Algorithms/school/spring-2017/algorithms/project-4/d_matrix.h
+iostream
+-
+vector
+-
+d_except.h
+C:/Users/Mary/Documents/GitHub/Algorithms/school/spring-2017/algorithms/project-4/d_except.h
+
+C:/Users/Mary/Documents/GitHub/Algorithms/school/spring-2017/algorithms/project-4/main.cpp
+iostream
+-
+cstdlib
+-
+board.h
+C:/Users/Mary/Documents/GitHub/Algorithms/school/spring-2017/algorithms/project-4/board.h
+string.h
+-
+
