@@ -36,6 +36,8 @@ class board
 		ValueType getCell(int, int);
 		void setCell(int x, int y, int c);
 		void printConflicts();
+		void clearCell(int x, int y);
+		bool isSolved();
 
 	private:
 
@@ -64,12 +66,13 @@ board::board(int sqSize)
 }
 
 void board::clear()
-// Mark all possible values as legal for each board entry
+// Mark all possible values as legal for each board entry, clears all conflict matrices
 {
 	for (int i = 1; i <= BoardSize; i++)
 		for (int j = 1; j <= BoardSize; j++)
 		{
-			value[i][j] = Blank;
+			//value[i][j] = Blank;
+			clearCell(i,j);
 		}
 }
 
@@ -89,6 +92,22 @@ void board::initialize(ifstream &fin)
 			if (ch != '.')
 				setCell(i,j,ch-'0');   // Convert char to int
 		}
+}
+
+bool board::isSolved()
+// Returns true if the board is completed, with no blank cells.
+{
+	for (int i = 1; i <= BoardSize; i++)
+		for (int j = 1; j <= BoardSize; j++)
+		{
+			if (isBlank(i,j)) {
+				cout << endl << "Board Solved? No" << endl;
+				return false;
+			}
+		}
+
+	cout << endl << "Board Solved? Yes" << endl;
+	return true;
 }
 
 bool board::conflictsOccur(int i, int j, int val)
@@ -115,6 +134,18 @@ void board::setCell(int x, int y, int c)
 	}
 }
 
+void board::clearCell(int x, int y)
+// Clears the cell. Updates board and conflicts.
+{
+	if (!isBlank(x,y)) {
+		int val = getCell(x,y);
+		int k = squareNumber(x,y);
+		value[x][y] = Blank;
+		crows[x][val] = false;
+		ccols[y][val] = false;
+		csquares[k][val] = false;
+	}
+}
 int board::squareNumber(int i, int j)
 // Return the square number of cell i,j (counting from left to right,
 // top to bottom.  Note that i and j each go from 1 to BoardSize

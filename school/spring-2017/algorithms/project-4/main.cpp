@@ -10,7 +10,7 @@ int main()
    ifstream fin;
 
    // Read the sample grid from the file.
-   string fileName = "C:\\Users\\Mary\\Documents\\GitHub\\Algorithms\\school\\spring-2017\\algorithms\\project-4\\Sudoku1.txt";
+   string fileName = "Sudoku 1-3.txt";
 
    fin.open(fileName.c_str());
    if (!fin)
@@ -28,6 +28,7 @@ int main()
         b1.initialize(fin);
         b1.print();
         b1.printConflicts();
+		b1.isSolved();
       }
    }
    catch  (indexRangeError &ex)
