@@ -24,6 +24,19 @@ const int MaxValue = 9;
 
 int numSolutions = 0;
 
+class cell
+{
+    public:
+        cell(int i, int j) { setX(i); setY(j); } 
+        void setX(int i) { x = i; } 
+        void setY(int j) { y = j; }
+        int getX() { return x; }
+        int getY() { return y; }
+    private:
+        int x;
+        int y;
+}
+
 class board
 // Stores the entire Sudoku board
 {
@@ -39,12 +52,16 @@ class board
 		void clearCell(int x, int y);
 		bool isSolved();
 
+        void solve();
+        cell findMostConstrainedCell();
+
 	private:
 
 		// The following matrices go from 1 to BoardSize in each
 		// dimension, i.e., they are each (BoardSize+1) * (BoardSize+1)
 
 		matrix<ValueType> value;
+        int rc = 0;
 
 		matrix<bool> crows;
 		matrix<bool> ccols;
@@ -254,4 +271,10 @@ void board::printConflicts()
 		}
 		cout << endl;
 	}
+}
+
+void board::solve()
+// solves the sudoku puzzle stored in the matrix
+{
+    
 }
