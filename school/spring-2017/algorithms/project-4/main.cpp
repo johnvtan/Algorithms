@@ -23,12 +23,18 @@ int main()
    {
       board b1(SquareSize);
 
-      while (fin && fin.peek() != 'Z')
+	  int puzzleNum = 0;
+
+	  while (fin && fin.peek() != 'Z')
       {
+		puzzleNum += 1;
+	    cout << endl << "Puzzle Number: " << puzzleNum << endl;
         b1.initialize(fin);
         b1.print();
         b1.printConflicts();
-		b1.isSolved();
+	    b1.solve();
+		b1.print();
+		//b1.isSolved();
       }
    }
    catch  (indexRangeError &ex)

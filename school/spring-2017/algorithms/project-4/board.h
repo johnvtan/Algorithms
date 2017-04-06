@@ -27,7 +27,8 @@ int numSolutions = 0;
 class cell
 {
     public:
-        cell(int i, int j) { setX(i); setY(j); } 
+        cell(int i, int j) { setX(i); setY(j); }
+		cell() {  } // default constructor
         void setX(int i) { x = i; } 
         void setY(int j) { y = j; }
         int getX() { return x; }
@@ -69,6 +70,7 @@ class board
 
 		bool conflictsOccur(int i, int j, int val);
 		int squareNumber(int i, int j);
+		int maxConflicts(int i, int j);
 
 };
 
@@ -119,12 +121,12 @@ bool board::isSolved()
 		for (int j = 1; j <= BoardSize; j++)
 		{
 			if (isBlank(i,j)) {
-				cout << endl << "Board Solved? No" << endl;
+				//cout << endl << "Board Solved? No" << endl;
 				return false;
 			}
 		}
 
-	cout << endl << "Board Solved? Yes" << endl;
+	//cout << endl << "Board Solved? Yes" << endl;
 	return true;
 }
 
@@ -277,5 +279,105 @@ void board::printConflicts()
 void board::solve()
 // solves the sudoku puzzle stored in the matrix
 {
-    
+    //Check if board is solved
+	if (isSolved()) {
+		cout << "Number of recursions: " << rc << endl;
+		print();
+		return;
+	}
+
+	else {
+		// increase recursion count
+		rc += 1;
+
+		// find cell with most conflicts
+		cell c = findMostConstrainedCell();
+
+		for (int i = 1; i < 10; i++) {
+			if (!conflictsOccur(c.getX(), c.getY(), i)) {
+				clearCell(c.getX(), c.getY());
+				setCell(c.getX(), c.getY(), i);
+				//cout << endl << "Set X:" << c.getX() << " Y: " << c.getY() << " Val: " << i << endl;
+				//print();
+				solve();
+			}
+		}
+
+		if (!isSolved()) {
+			clearCell(c.getX(), c.getY());
+		}
+		// backtrack
+		//cout << endl << "Clear X:" << c.getX() << " Y: " << c.getY() << " Val: " << getCell(c.getX(), c.getY()) << endl;
+		//printConflicts();
+		//clearCell(c.getX(), c.getY());
+		//print();
+		//cout << "Number of recursions: " << rc << endl;
+	}
+
 }
+
+
+cell board::findMostConstrainedCell()
+// finds a blank cell with the most constraints
+{
+	int max = 0;
+	cell maxCell(-1,-1);
+
+	for (int i = 1; i <= BoardSize; i++)
+	{
+		for (int j = 1; j <= BoardSize; j++)
+		{
+			if (isBlank(i,j)) {
+
+				if (maxConflicts(i,j) > max) {
+					max = maxConflicts(i,j);
+					maxCell.setX(i);
+					maxCell.setY(j);
+				}
+			}
+		}
+	}
+
+	return maxCell;
+
+}
+
+int board::maxConflicts(int i, int j)
+// returns the maximum number of conflicts for this cell
+{
+	int k = squareNumber(i,j);
+
+	int maxConstraints = 0;
+
+	int temp = 0;
+	for (int a = 1; a < 10; a++)
+	{
+		temp += crows[i][a];
+	}
+
+	if (temp > maxConstraints) {
+		maxConstraints = temp;
+	}
+
+	temp = 0;
+	for (int a = 1; a < 10; a++)
+	{
+		temp += ccols[j][a];
+	}
+
+	if (temp > maxConstraints) {
+		maxConstraints = temp;
+	}
+
+	temp = 0;
+	for (int a = 1; a < 10; a++)
+	{
+		temp += csquares[k][a];
+	}
+
+	if (temp > maxConstraints) {
+		maxConstraints = temp;
+	}
+
+	return maxConstraints;
+};
