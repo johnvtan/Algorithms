@@ -1,10 +1,13 @@
 // Mary Forde
 // John Tan
 // Project 3
+
 #include"d_matrix.h"
 #include"d_except.h"
 #include<fstream>
 #include<iostream>
+
+// This represents a grid of letters.
 
 using namespace std;
 

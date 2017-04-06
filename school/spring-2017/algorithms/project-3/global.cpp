@@ -1,5 +1,7 @@
 #include "global.h"
 
+// This implements the global functions findMatches and search
+
 using namespace std;
 
 void findMatches(dictionary& d, grid& g, int sortType)
