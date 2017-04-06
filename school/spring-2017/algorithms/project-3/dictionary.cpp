@@ -27,6 +27,7 @@ dictionary::dictionary(const char* fileName)
 	}
 	
 	myFile.close();
+	
 } // end constructor
 
 ostream& operator<<(ostream& ostr, dictionary& dict) 
@@ -140,7 +141,7 @@ void dictionary::heapSort()
 {
 	heap<string> h(words);
 	
-	h.heapSort();
+	words = h.heapSort();
 	
 }
 

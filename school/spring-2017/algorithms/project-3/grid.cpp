@@ -164,4 +164,4 @@ ostream& operator<<(ostream& ostr, grid& g)
 	}
 	
 	return ostr;
-}
+} // end <<
