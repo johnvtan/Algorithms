@@ -10,7 +10,7 @@ int main()
    ifstream fin;
 
    // Read the sample grid from the file.
-   string fileName = "Sudoku 1-3.txt";
+   string fileName = "sudoku1-3.txt";
 
    fin.open(fileName.c_str());
    if (!fin)
@@ -31,8 +31,9 @@ int main()
 	    cout << endl << "Puzzle Number: " << puzzleNum << endl;
         b1.initialize(fin);
         b1.print();
-        b1.printConflicts();
-	    b1.solve();
+        //b1.printConflicts();
+	    cout << "Solving ..." << endl;
+		b1.solve();
 		b1.print();
 		//b1.isSolved();
       }

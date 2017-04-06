@@ -54,7 +54,6 @@ class board
 		bool isSolved();
 
         void solve();
-        cell findMostConstrainedCell();
 
 	private:
 
@@ -70,7 +69,7 @@ class board
 
 		bool conflictsOccur(int i, int j, int val);
 		int squareNumber(int i, int j);
-		int maxConflicts(int i, int j);
+	    cell firstBlankCell();
 
 };
 
@@ -282,7 +281,7 @@ void board::solve()
     //Check if board is solved
 	if (isSolved()) {
 		cout << "Number of recursions: " << rc << endl;
-		print();
+		//print();
 		return;
 	}
 
@@ -291,7 +290,7 @@ void board::solve()
 		rc += 1;
 
 		// find cell with most conflicts
-		cell c = findMostConstrainedCell();
+		cell c = firstBlankCell();
 
 		for (int i = 1; i < 10; i++) {
 			if (!conflictsOccur(c.getX(), c.getY(), i)) {
@@ -304,44 +303,38 @@ void board::solve()
 		}
 
 		if (!isSolved()) {
+			//cout << endl << "Clear X:" << c.getX() << " Y: " << c.getY() << " Val: " << getCell(c.getX(), c.getY()) << endl;
 			clearCell(c.getX(), c.getY());
+			//print();
 		}
-		// backtrack
-		//cout << endl << "Clear X:" << c.getX() << " Y: " << c.getY() << " Val: " << getCell(c.getX(), c.getY()) << endl;
-		//printConflicts();
-		//clearCell(c.getX(), c.getY());
-		//print();
-		//cout << "Number of recursions: " << rc << endl;
 	}
 
 }
 
 
-cell board::findMostConstrainedCell()
+cell board::firstBlankCell()
 // finds a blank cell with the most constraints
 {
-	int max = 0;
-	cell maxCell(-1,-1);
+	cell c;
 
 	for (int i = 1; i <= BoardSize; i++)
 	{
 		for (int j = 1; j <= BoardSize; j++)
 		{
-			if (isBlank(i,j)) {
-
-				if (maxConflicts(i,j) > max) {
-					max = maxConflicts(i,j);
-					maxCell.setX(i);
-					maxCell.setY(j);
-				}
+			if (isBlank(i,j))
+			{
+				c.setX(i);
+				c.setY(j);
+				//return c;
 			}
 		}
 	}
 
-	return maxCell;
+	return c;
 
 }
 
+/*
 int board::maxConflicts(int i, int j)
 // returns the maximum number of conflicts for this cell
 {
@@ -380,4 +373,4 @@ int board::maxConflicts(int i, int j)
 	}
 
 	return maxConstraints;
-};
+};*/
