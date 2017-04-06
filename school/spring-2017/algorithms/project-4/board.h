@@ -35,7 +35,7 @@ class cell
     private:
         int x;
         int y;
-}
+};
 
 class board
 // Stores the entire Sudoku board
@@ -61,7 +61,7 @@ class board
 		// dimension, i.e., they are each (BoardSize+1) * (BoardSize+1)
 
 		matrix<ValueType> value;
-        int rc = 0;
+        int rc;
 
 		matrix<bool> crows;
 		matrix<bool> ccols;
@@ -85,6 +85,7 @@ board::board(int sqSize)
 void board::clear()
 // Mark all possible values as legal for each board entry, clears all conflict matrices
 {
+    rc = 0;
 	for (int i = 1; i <= BoardSize; i++)
 		for (int j = 1; j <= BoardSize; j++)
 		{
