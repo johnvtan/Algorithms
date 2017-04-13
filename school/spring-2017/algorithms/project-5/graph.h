@@ -627,8 +627,10 @@ bool graph::isEdge(NodeType i, NodeType j) const
 // false otherwise.  Throws an exception if i is too small or too
 // large.
 {
-	if (i < 0 || i >= numNodes() || j < 0 || j >= numNodes())
+	if (i < 0 || i >= numNodes() || j < 0 || j >= numNodes()) {
+		cout << "NodeI: " << i << " Node J: " << j;
 		throw rangeError("Bad value in graph::isEdge");
+	}
 
 	return edges[i][j].isValid();
 }
@@ -704,8 +706,11 @@ edge &graph::getEdge(int i, int j)
 // too small or too large, or if the edge does not exist, throws an
 // exception.
 {
-	if (i < 0 || i >= numNodes() || j < 0 || j >= numNodes())
+	if (i < 0 || i >= numNodes() || j < 0 || j >= numNodes()) {
+		cout << "NodeI: " << i << " Node J: " << j;
+
 		throw rangeError("Bad value in graph::getEdge");
+	}
 
 	if (!isEdge(i,j))
 		throw rangeError("Edge does not exist in graph::getEdge");
@@ -718,8 +723,11 @@ const edge &graph::getEdge(int i, int j) const
 // too small or too large, or if the edge does not exist, throws an
 // exception.
 {
-	if (i < 0 || i >= numNodes() || j < 0 || j >= numNodes())
+	if (i < 0 || i >= numNodes() || j < 0 || j >= numNodes()) {
+		cout << "NodeI: " << i << " Node J: " << j;
+
 		throw rangeError("Bad value in graph::getEdge");
+	}
 
 	if (!isEdge(i,j))
 		throw rangeError("Edge does not exist in graph::getEdge");
@@ -839,8 +847,11 @@ bool graph::isVisited(int i) const
 // Return true if node has been visited.  Otherwise return false.  Throws an
 // exception if i is too large or too small.
 {
-	if (i < 0 || i >= numNodes())
+	if (i < 0 || i >= numNodes()) {
+		cout << "IsVisited: Node: " << i;
+
 		throw rangeError("Bad value in graph::getEdge");
+	}
 
 	return nodes[i].isVisited();
 }

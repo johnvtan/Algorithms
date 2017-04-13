@@ -32,8 +32,9 @@ int main()
 
 		m.mapMazeToGraph(g);
 
-		cout << "Graph: " << endl << g;
+		//cout << "Graph: " << endl << g;
 
+		m.findPathRecursive(g);
 
 	}
 	catch (indexRangeError &ex)
