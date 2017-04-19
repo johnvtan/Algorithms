@@ -9,6 +9,7 @@
 #include <cstdlib>
 #include "d_matrix.h"
 #include "graph.h"
+#include <queue>
 
 class maze
 {
@@ -24,6 +25,8 @@ public:
 	void mapMazeToGraph(graph &g);
 	void findPathRecursive(graph &g);
 	void findPathNonRecursive(graph &g);
+	bool findShortestPath1(graph &g);
+	bool findShortestPath2(graph &g);
 
 private:
 	int rows; // number of rows in the maze
@@ -40,6 +43,12 @@ private:
 struct COORDINATE {
 	int x;
 	int y;
+};
+
+struct LABEL {
+	struct COORDINATE coordinates;
+	int distance;
+	struct COORDINATE parent;
 };
 
 void maze::setMap(int i, int j, int n)
@@ -259,7 +268,7 @@ bool maze::findPathRecursiveHelper(graph &g, int currI, int currJ, bool &solved)
 			int rightNode = getMap(currI, currJ + 1);
 			if (rightNode >= 0 && g.isEdge(currNode, rightNode) && !g.isVisited(rightNode)) {
 				//currPath.push_back(g.getEdge(currNode, rightNode));
-				if (findPathRecursiveHelper(g, currI, currJ s+ 1, solved)) {
+				if (findPathRecursiveHelper(g, currI, currJ + 1, solved)) {
 					cout << "Go Left from Node " << currNode-1 << endl;
 					print(rows-1, cols-1, currI, currJ);
 				}
@@ -399,6 +408,281 @@ void maze::findPathNonRecursive(graph &g)
 		if (!foundNeighbor) {
 			cout << "Hit Dead End at Node " << currNode <<". Go back." << endl;
 			stack.pop_back();
+		}
+
+	}
+
+}
+
+bool maze::findShortestPath1(graph &g)
+// finds the shortest path in the maze using BFS algorithm
+{
+	// vector of predecessors for each node in the graph
+	vector<int> pred;
+	pred.resize(g.numNodes(),-1);
+
+	vector<struct COORDINATE> predCoors;
+	predCoors.resize(g.numNodes());
+
+	// queue of the nodes being traversed
+	vector<struct COORDINATE> queue;
+
+	int startNode = getMap(0,0);
+	g.visit(startNode);
+
+	struct COORDINATE startNodeCoors;
+	startNodeCoors.x = 0;
+	startNodeCoors.y = 0;
+	queue.push_back(startNodeCoors);
+
+	struct COORDINATE vCoors; //front of the queue : coordinates
+	int currI;
+	int currJ;
+	int currNode; // front of the queue: node
+
+	while (queue.size() > 0) {
+		vCoors = queue.front();
+		currI = vCoors.y;
+		currJ = vCoors.x;
+		currNode = getMap(currI, currJ);
+
+		// Left
+		if (currJ > 0) {
+			int leftNode = getMap(currI, currJ - 1);
+			if (leftNode >= 0 && g.isEdge(currNode, leftNode) && !g.isVisited(leftNode)) {
+				struct COORDINATE temp;
+				temp.y = currI;
+				temp.x = currJ - 1;
+				queue.push_back(temp);
+				g.visit(leftNode);
+
+				pred.at(leftNode) = currNode;
+				predCoors.at(leftNode) = temp;
+			}
+		}
+
+		//Right
+		if (currJ < cols - 1) {
+			int rightNode = getMap(currI, currJ + 1);
+			if (rightNode >= 0 && g.isEdge(currNode, rightNode) && !g.isVisited(rightNode)) {
+				struct COORDINATE temp;
+				temp.x = currJ + 1;
+				temp.y = currI;
+				queue.push_back(temp);
+				g.visit(rightNode);
+
+				pred.at(rightNode) = currNode;
+				predCoors.at(rightNode) = temp;
+			}
+		}
+
+		//Down
+		if (currI < rows - 1) {
+			int upNode = getMap(currI + 1, currJ);
+			if (upNode >= 0 && g.isEdge(currNode, upNode) && !g.isVisited(upNode)) {
+				struct COORDINATE temp;
+				temp.x = currJ;
+				temp.y = currI + 1;
+				queue.push_back(temp);
+				g.visit(upNode);
+
+				pred.at(upNode) = currNode;
+				predCoors.at(upNode) = temp;
+			}
+		}
+
+		//Up
+		if (currI > 0) {
+			int downNode = getMap(currI - 1, currJ);
+			if (downNode >= 0 && g.isEdge(currNode, downNode) && !g.isVisited(downNode)) {
+				struct COORDINATE temp;
+				temp.x = currJ;
+				temp.y = currI - 1;
+				queue.push_back(temp);
+				g.visit(downNode);
+
+				pred.at(downNode) = currNode;
+				predCoors.at(downNode) = temp;
+			}
+		}
+
+		queue.erase(queue.begin());
+
+	}
+
+	int target = getMap(0,0);
+	int curr = getMap(rows-1, cols-1);
+
+	if (pred.at(curr) < 0) {
+		cout << "Path not found." << endl;
+		return false; // no predecessors -> no path to start
+	}
+
+	else {
+		cout << "Path found!" << endl;
+
+		vector<struct COORDINATE> inOrder;
+		struct COORDINATE temp;
+		while (curr != target)
+		{
+			temp = predCoors.at(curr);
+			inOrder.push_back(temp);
+
+			curr = pred.at(curr);
+		}
+
+		temp.x = 0;
+		temp.y = 0;
+		inOrder.push_back(temp);
+
+		cout << "Shortest path contains " << inOrder.size() <<  " nodes." << endl;
+
+		print(rows-1, cols-1, 0, 0);
+
+		for (int i = inOrder.size() - 1; i > 0; i--)
+		{
+			if (inOrder.at(i).x - inOrder.at(i-1).x > 0)
+			{
+				cout << "Go left." << endl;
+			}
+			else if (inOrder.at(i).x - inOrder.at(i-1).x < 0)
+			{
+				cout << "Go right." << endl;
+			}
+			else if (inOrder.at(i).y - inOrder.at(i-1).y > 0)
+			{
+				cout << "Go up." << endl;
+			}
+			else if (inOrder.at(i).y - inOrder.at(i-1).y < 0)
+			{
+				cout << "Go down." << endl;
+			}
+
+			print(rows-1, cols-1, inOrder.at(i-1).y, inOrder.at(i-1).x);
+		}
+
+		return true;
+	}
+}
+
+bool maze::findShortestPath2(graph &g)
+// finds the shortest path in the maze using Dijkstra algorithm
+{
+	vector<LABEL> pqueue;
+	pqueue.resize(g.numNodes());
+
+	int startNode = getMap(0,0);
+	g.visit(startNode);
+
+	struct COORDINATE startNodeCoors;
+	startNodeCoors.x = 0;
+	startNodeCoors.y = 0;
+
+	struct LABEL startNodeLabel;
+	startNodeLabel.coordinates = startNodeCoors;
+	startNodeLabel.distance = 0;
+	startNodeLabel.parent.x = -1;
+	startNodeLabel.parent.y = -1;
+
+	pqueue.push_back(startNodeLabel);
+
+	struct LABEL currLabel; //front of the queue : coordinates
+	int currI;
+	int currJ;
+	int currNode; // front of the queue: node
+
+	while (queue.size() > 0) {
+		currLabel = pqueue.front();
+		currI = currLabel.coordinates.y;
+		currJ = currLabel.coordinates.x;
+		currNode = getMap(currI, currJ);
+
+		// Check if we've solved the maze
+		if (currNode == getMap(rows-1, cols-1))
+		{
+			break;
+		}
+
+		// Left
+		if (currJ > 0) {
+			int leftNode = getMap(currI, currJ - 1);
+			if (leftNode >= 0 && g.isEdge(currNode, leftNode) && !g.isVisited(leftNode)) {
+				struct LABEL temp;
+				temp.coordinates.y = currI;
+				temp.coordinates.x = currJ - 1;
+				if (currLabel.distance + 1 < temp.distance)
+				{
+					temp.distance = currLabel.distance + 1;
+					temp.parent = currLabel.coordinates;
+				}
+
+				pqueue.push_back(temp);
+				cout << "Node at X: " << temp.coordinates.x << " Y: " << temp.coordiantes.y << endl;
+			}
+		}
+
+		//Right
+		if (currJ < cols - 1) {
+			int rightNode = getMap(currI, currJ + 1);
+			if (rightNode >= 0 && g.isEdge(currNode, rightNode) && !g.isVisited(rightNode)) {
+				temp.coordinates.y = currI;
+				temp.coordinates.x = currJ + 1;
+				if (currLabel.distance + 1 < temp.distance)
+				{
+					temp.distance = currLabel.distance + 1;
+					temp.parent = currLabel.coordinates;
+				}
+				queue.push_back(temp);
+				cout << "Node at X: " << temp.coordinates.x << " Y: " << temp.coordiantes.y << endl;
+			}
+		}
+
+		//Down
+		if (currI < rows - 1) {
+			int upNode = getMap(currI + 1, currJ);
+			if (upNode >= 0 && g.isEdge(currNode, upNode) && !g.isVisited(upNode)) {
+				temp.coordinates.y = currI + 1;
+				temp.coordinates.x = currJ;
+				if (currLabel.distance + 1 < temp.distance)
+				{
+					temp.distance = currLabel.distance + 1;
+					temp.parent = currLabel.coordinates;
+				}
+
+				pqueue.push_back(temp);
+				cout << "Node at X: " << temp.coordinates.x << " Y: " << temp.coordiantes.y << endl;
+			}
+		}
+
+		//Up
+		if (currI > 0) {
+			int downNode = getMap(currI - 1, currJ);
+			if (downNode >= 0 && g.isEdge(currNode, downNode) && !g.isVisited(downNode)) {
+				temp.coordinates.y = currI - 1;
+				temp.coordinates.x = currJ;
+				if (currLabel.distance + 1 < temp.distance)
+				{
+					temp.distance = currLabel.distance + 1;
+					temp.parent = currLabel.coordinates;
+				}
+				pqueue.push_back(temp);
+				cout << "Node at X: " << temp.coordinates.x << " Y: " << temp.coordiantes.y << endl;
+			}
+		}
+
+		pqueue.erase(pqueue.begin());
+
+		for (int i = 0; i < pqueue.size(); i++)
+		{
+			for (int j = 0; j < pqueue.size(); j++)
+			{
+				if (pqueue.at(i).distance > pqueue.at(j).distance)
+				{
+					struct LABEL temp = pqueue.at(i);
+					pqueue.at(i) = pqueue.at(j);
+					pqueue.at(j) = temp;
+				}
+			}
 		}
 
 	}
